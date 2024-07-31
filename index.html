@@ -11,11 +11,19 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            transition: background-color 0.3s;
+        }
+        body.dimmed {
+            background-color: rgba(0, 0, 0, 0.5);
         }
         .container {
             width: 80%;
             margin: 0 auto;
             padding: 20px;
+            transition: filter 0.3s;
+        }
+        body.dimmed .container {
+            filter: brightness(0.5);
         }
         header {
             text-align: center;
@@ -59,6 +67,8 @@
             background-size: cover;
             background-position: center;
             width: calc(48% - 20px); /* 20% smaller than 50% */
+            transition: transform 0.3s, z-index 0.3s;
+            z-index: 0;
         }
         .portfolio-item::before {
             content: "";
@@ -103,6 +113,10 @@
             display: block;
             margin-bottom: 5px; /* vertical stacking with 5px margin */
         }
+        .portfolio-item:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
         footer {
             text-align: center;
             padding: 20px 0;
@@ -110,6 +124,19 @@
             color: #fff;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            portfolioItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    document.body.classList.add('dimmed');
+                });
+                item.addEventListener('mouseleave', () => {
+                    document.body.classList.remove('dimmed');
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
