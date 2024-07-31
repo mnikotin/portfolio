@@ -84,27 +84,14 @@
             margin: 10px 0;
             color: #fff;
         }
-        .portfolio-item .hashtags, .portfolio-item .related-company {
+        .portfolio-item .hashtags {
             font-style: italic;
             color: #ddd;
-        }
-        .portfolio-item .hashtags {
             position: absolute;
             bottom: 10px;
             left: 20px;
         }
-        .portfolio-item .related-company {
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px 0;
-            background: #222;
-            color: #fff;
-        }
-        @media (min-width: 768px) {
+        @media (min-width: 1000px) {
             .projects-grid {
                 display: flex;
                 flex-wrap: wrap;
@@ -113,11 +100,23 @@
             .portfolio-item {
                 flex: 0 1 calc(50% - 40px);
             }
+            .portfolio-item .description {
+                display: block;
+            }
         }
-        @media (max-width: 767px) {
+        @media (max-width: 999px) {
             .portfolio-item {
                 margin: 20px auto;
             }
+            .portfolio-item .description {
+                display: none;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: #222;
+            color: #fff;
         }
     </style>
 </head>
@@ -178,7 +177,6 @@
                         <p class="dates">${startDate} - ${endDate}</p>
                         <p class="description">${project.fields['Project Description']}</p>
                         <p class="hashtags">${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : 'None'}</p>
-                        <p class="related-company">${project.fields['Related Company']}</p>
                     </div>
                 `;
                 projectsContainer.appendChild(projectElement);
