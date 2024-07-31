@@ -69,6 +69,7 @@
             width: calc(48% - 20px); /* 20% smaller than 50% */
             transition: transform 0.3s, z-index 0.3s;
             z-index: 0;
+            cursor: pointer;
         }
         .portfolio-item::before {
             content: "";
@@ -117,6 +118,78 @@
             transform: scale(1.1);
             z-index: 10;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation-name: animateModal;
+            animation-duration: 0.4s;
+        }
+        @keyframes animateModal {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .modal-header img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .modal-body {
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .modal-footer {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .modal-footer .hashtags {
+            font-style: italic;
+            color: #333;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        .modal-footer .hashtags span {
+            display: inline-block;
+            margin-right: 10px;
+        }
         footer {
             text-align: center;
             padding: 20px 0;
@@ -124,19 +197,6 @@
             color: #fff;
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-            portfolioItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    document.body.classList.add('dimmed');
-                });
-                item.addEventListener('mouseleave', () => {
-                    document.body.classList.remove('dimmed');
-                });
-            });
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -164,6 +224,23 @@
         <footer>
             <p>&copy; 2024 Mikhail Nikotin</p>
         </footer>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="Project Image">
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription"></p>
+            </div>
+            <div class="modal-footer">
+                <p class="hashtags" id="modalHashtags"></p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -197,8 +274,31 @@
                         <p class="hashtags">${project.fields['Hashtags'] ? project.fields['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : ''}</p>
                     </div>
                 `;
+                projectElement.addEventListener('click', () => {
+                    openModal(project);
+                });
                 projectsContainer.appendChild(projectElement);
             });
+        }
+
+        function openModal(project) {
+            document.getElementById('modalImage').src = project.fields['Project Face Image'][0].url;
+            document.getElementById('modalTitle').textContent = project.fields['Project Name'];
+            document.getElementById('modalDescription').textContent = project.fields['One Line Description'];
+            document.getElementById('modalHashtags').innerHTML = project.fields['Hashtags'] ? project.fields['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : '';
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        document.querySelector('.close').addEventListener('click', closeModal);
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
         }
 
         fetchProjects().then(displayProjects).catch(error => {
