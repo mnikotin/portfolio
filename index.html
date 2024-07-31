@@ -113,6 +113,7 @@
                     <p class="hashtags">Hashtags: ${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : 'None'}</p>
                     <p class="related-company">Related Company: ${project.fields['Related Company']}</p>
                     <p class="completion-date">Completion Date: ${new Date(project.fields['Project Completion Date']).toLocaleDateString()}</p>
+                    <p class="Start-date">Start Date: ${new Date(project.fields['Project Start Date']).toLocaleDateString()}</p>
                 `;
                 projectsContainer.appendChild(projectElement);
             });
