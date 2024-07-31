@@ -44,24 +44,49 @@
         .portfolio-item {
             background: #fff;
             padding: 20px;
-            margin: 20px 0;
+            margin: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+        .portfolio-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            filter: blur(8px);
+            z-index: 0;
+        }
+        .portfolio-item-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            text-align: center;
         }
         .portfolio-item h3 {
             font-size: 1.5em;
-            margin-bottom: 5px;
+            margin: 10px 0;
+            color: #fff;
         }
         .portfolio-item .dates {
-            color: #777;
-            margin-bottom: 10px;
+            color: #ddd;
+            margin: 5px 0;
         }
         .portfolio-item .description {
-            margin-bottom: 15px;
+            margin: 10px 0;
+            color: #fff;
         }
         .portfolio-item .hashtags, .portfolio-item .related-company {
             font-style: italic;
-            color: #777;
+            color: #ddd;
         }
         .portfolio-item .hashtags {
             position: absolute;
@@ -78,6 +103,21 @@
             padding: 20px 0;
             background: #222;
             color: #fff;
+        }
+        @media (min-width: 768px) {
+            .projects-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .portfolio-item {
+                flex: 0 1 calc(50% - 40px);
+            }
+        }
+        @media (max-width: 767px) {
+            .portfolio-item {
+                margin: 20px auto;
+            }
         }
     </style>
 </head>
@@ -98,7 +138,7 @@
         </section>
         <section id="portfolio">
             <h2>Portfolio</h2>
-            <div id="projects"></div>
+            <div id="projects" class="projects-grid"></div>
         </section>
         <section id="contact">
             <h2>Contact</h2>
@@ -131,12 +171,15 @@
                 projectElement.classList.add('portfolio-item');
                 const startDate = new Date(project.fields['Project Start Date']).toLocaleDateString();
                 const endDate = new Date(project.fields['Project Completion Date']).toLocaleDateString();
+                projectElement.style.backgroundImage = `url(${project.fields['Project Face Image'][0].url})`;
                 projectElement.innerHTML = `
-                    <h3>${project.fields['Project Name']}</h3>
-                    <p class="dates">${startDate} - ${endDate}</p>
-                    <p class="description">${project.fields['Project Description']}</p>
-                    <p class="hashtags">Hashtags: ${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : 'None'}</p>
-                    <p class="related-company">Related Company: ${project.fields['Related Company']}</p>
+                    <div class="portfolio-item-content">
+                        <h3>${project.fields['Project Name']}</h3>
+                        <p class="dates">${startDate} - ${endDate}</p>
+                        <p class="description">${project.fields['Project Description']}</p>
+                        <p class="hashtags">${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : 'None'}</p>
+                        <p class="related-company">${project.fields['Related Company']}</p>
+                    </div>
                 `;
                 projectsContainer.appendChild(projectElement);
             });
