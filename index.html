@@ -127,14 +127,13 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(128, 128, 128, 0.8); /* 80% opacity grey background */
             align-items: center;
             justify-content: center;
         }
         .modal-content {
-            background-color: #fefefe;
-            padding: 20px;
-            border: 1px solid #888;
+            padding: 0; /* Removed padding */
+            border: none; /* Removed border */
             width: 35%;
             height: 80%;
             display: flex;
@@ -142,31 +141,72 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             animation-name: animateModal;
             animation-duration: 0.4s;
+            border-radius: 15px; /* Rounded corners */
+            background: rgba(255, 255, 255, 0.7); /* 70% opacity */
+            position: relative;
+        }
+        .modal-content-background {
+            border-radius: 15px; /* Rounded corners */
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.7; /* 70% opacity */
         }
         @keyframes animateModal {
             from {opacity: 0}
             to {opacity: 1}
         }
         .modal-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            position: relative;
             width: 100%;
+            text-align: center;
+            color: white;
+            height: 20%; /* Set height of modal header to 20% */
         }
         .modal-header img {
             width: 100%;
-            height: 15%;
-            object-fit: cover;
-            margin-bottom: 10px;
+            height: 100%; /* Set image height to fill the modal header */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            margin: 0; /* Removed margin */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
         }
         .modal-header h2 {
+            position: absolute;
+            top: 50%; /* Adjusted to be in the middle of the image */
+            left: 50%;
+            transform: translate(-50%, -50%);
             margin: 0;
+            font-size: 1.5em;
+            color: white;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
         }
         .modal-body {
             flex-grow: 1;
             overflow-y: auto;
-            margin: 20px 0;
+            margin: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9; /* Light color background */
+            padding: 10px;
         }
         .modal-footer {
             text-align: center;
@@ -220,9 +260,11 @@
     <!-- The Modal -->
     <div id="myModal" class="modal">
         <div class="modal-content">
+            <div class="modal-content-background" id="modalBackground"></div>
             <div class="modal-header">
                 <img id="modalImage" src="" alt="Project Image">
                 <h2 id="modalTitle"></h2>
+                <div class="modal-close" id="modalClose">&times;</div>
             </div>
             <div class="modal-body">
                 <p id="modalDescription"></p>
@@ -271,7 +313,41 @@
             });
         }
 
+        function getDominantColor(src, callback) {
+            const img = document.createElement('img');
+            img.src = src;
+            img.crossOrigin = "Anonymous";
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                context.drawImage(img, 0, 0);
+                const data = context.getImageData(0, 0, img.width, img.height).data;
+                let r = 0, g = 0, b = 0, count = 0;
+
+                for (let i = 0; i < data.length; i += 4) {
+                    r += data[i];
+                    g += data[i + 1];
+                    b += data[i + 2];
+                    count++;
+                }
+
+                r = Math.floor(r / count);
+                g = Math.floor(g / count);
+                b = Math.floor(b / count);
+
+                callback(`rgba(${r},${g},${b},0.7)`);
+            };
+        }
+
         function openModal(project) {
+            const modalBackground = document.getElementById('modalBackground');
+            getDominantColor(project.fields['Project Face Image'][0].url, color => {
+                modalBackground.style.background = color;
+                document.getElementById('modalClose').style.color = color;
+            });
+
             document.getElementById('modalImage').src = project.fields['Project Face Image'][0].url;
             document.getElementById('modalTitle').textContent = project.fields['Project Name'];
             document.getElementById('modalDescription').textContent = project.fields['One Line Description'];
@@ -279,9 +355,15 @@
             document.getElementById('myModal').style.display = "flex";
         }
 
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+
         window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
-                document.getElementById('myModal').style.display = "none";
+                closeModal();
             }
         }
 
