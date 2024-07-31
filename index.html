@@ -41,10 +41,15 @@
         section {
             margin: 50px 0;
         }
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
         .portfolio-item {
             background: #fff;
             padding: 20px;
-            margin: 20px;
+            margin: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             position: relative;
             display: flex;
@@ -53,6 +58,7 @@
             align-items: center;
             background-size: cover;
             background-position: center;
+            width: calc(50% - 20px);
         }
         .portfolio-item::before {
             content: "";
@@ -83,6 +89,7 @@
         .portfolio-item .description {
             margin: 10px 0;
             color: #fff;
+            display: none;
         }
         .portfolio-item .hashtags {
             font-style: italic;
@@ -92,13 +99,8 @@
             left: 20px;
         }
         @media (min-width: 1000px) {
-            .projects-grid {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
             .portfolio-item {
-                flex: 0 1 calc(50% - 40px);
+                width: calc(50% - 20px);
             }
             .portfolio-item .description {
                 display: block;
@@ -106,10 +108,8 @@
         }
         @media (max-width: 999px) {
             .portfolio-item {
-                margin: 20px auto;
-            }
-            .portfolio-item .description {
-                display: none;
+                width: calc(100% - 20px);
+                margin: 10px auto;
             }
         }
         footer {
@@ -176,7 +176,7 @@
                         <h3>${project.fields['Project Name']}</h3>
                         <p class="dates">${startDate} - ${endDate}</p>
                         <p class="description">${project.fields['Project Description']}</p>
-                        <p class="hashtags">${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : 'None'}</p>
+                        <p class="hashtags">${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : ''}</p>
                     </div>
                 `;
                 projectsContainer.appendChild(projectElement);
