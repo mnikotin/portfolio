@@ -46,16 +46,38 @@
             padding: 20px;
             margin: 20px 0;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .portfolio-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+        .portfolio-item .dates {
+            color: #777;
+            margin-bottom: 10px;
+        }
+        .portfolio-item .description {
+            margin-bottom: 15px;
+        }
+        .portfolio-item .hashtags, .portfolio-item .related-company {
+            font-style: italic;
+            color: #777;
+        }
+        .portfolio-item .hashtags {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+        .portfolio-item .related-company {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
         }
         footer {
             text-align: center;
             padding: 20px 0;
             background: #222;
             color: #fff;
-        }
-        .hashtags, .related-company, .completion-date {
-            font-style: italic;
-            color: #777;
         }
     </style>
 </head>
@@ -107,13 +129,14 @@
             projects.forEach(project => {
                 const projectElement = document.createElement('div');
                 projectElement.classList.add('portfolio-item');
+                const startDate = new Date(project.fields['Project Start Date']).toLocaleDateString();
+                const endDate = new Date(project.fields['Project Completion Date']).toLocaleDateString();
                 projectElement.innerHTML = `
                     <h3>${project.fields['Project Name']}</h3>
-                    <p>${project.fields['Project Description']}</p>
+                    <p class="dates">${startDate} - ${endDate}</p>
+                    <p class="description">${project.fields['Project Description']}</p>
                     <p class="hashtags">Hashtags: ${project.fields['Hashtags'] ? project.fields['Hashtags'].join(', ') : 'None'}</p>
                     <p class="related-company">Related Company: ${project.fields['Related Company']}</p>
-                    <p class="completion-date">Completion Date: ${new Date(project.fields['Project Completion Date']).toLocaleDateString()}</p>
-                    <p class="Start-date">Start Date: ${new Date(project.fields['Project Start Date']).toLocaleDateString()}</p>
                 `;
                 projectsContainer.appendChild(projectElement);
             });
