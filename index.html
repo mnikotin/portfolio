@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,14 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
-            transition: background-color 0.3s;
         }
+
         .container {
             width: 80%;
             margin: 0 auto;
             padding: 20px;
-            transition: filter 0.3s;
-            position: relative;
         }
+
         .profile-section {
             position: absolute;
             top: 20px;
@@ -29,6 +29,7 @@
             align-items: center;
             gap: 10px;
         }
+
         .profile-image {
             width: 60px;
             height: 60px;
@@ -36,68 +37,86 @@
             object-fit: cover;
             margin-left: 10px;
         }
+
         .social-icons {
             display: flex;
             gap: 10px;
         }
+
         .social-icons img {
             width: 30px;
             height: 30px;
             border-radius: 50%;
             cursor: pointer;
         }
+
         header {
             text-align: center;
             padding: 50px 0;
         }
-        header h1, header p {
+
+        header h1 {
             margin: 0;
+            font-size: 2.5em;
             color: #222;
         }
-        header h1 {
-            font-size: 2.5em;
+
+        header p {
+            margin: 0;
+            color: #555;
         }
+
         nav {
             text-align: center;
             margin: 20px 0;
         }
+
         nav a {
             margin: 0 15px;
             text-decoration: none;
             color: #555;
         }
+
         nav a:hover {
             color: #000;
         }
+
         section {
             margin: 50px 0;
         }
+
         section h2 {
             text-align: center;
         }
+
         .about-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
+
         .about-text {
             width: 48%;
         }
+
         .about-image {
             width: 48%;
             text-align: right;
         }
+
         .about-image img {
             width: 100%;
             height: 100%;
             border-radius: 10px;
             object-fit: cover;
         }
+
         .projects-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
         }
+
         .portfolio-item {
             background: #fff;
             padding: 10px;
@@ -110,11 +129,12 @@
             align-items: center;
             background-size: cover;
             background-position: center;
-            width: calc(48% - 20px); /* 20% smaller than 50% */
+            width: calc(48% - 20px);
             transition: transform 0.3s, z-index 0.3s;
             z-index: 0;
             cursor: pointer;
         }
+
         .portfolio-item::before {
             content: "";
             position: absolute;
@@ -123,45 +143,53 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            filter: blur(11px); /* Increased blur by 40% */
+            filter: blur(11px);
             z-index: 0;
         }
+
         .portfolio-item-content {
             position: relative;
             z-index: 1;
             width: 100%;
             text-align: center;
         }
+
         .portfolio-item h3 {
             font-size: 1.5em;
             margin: 10px 0;
             color: #fff;
         }
+
         .portfolio-item .dates {
             color: #ddd;
             margin: 5px 0;
         }
+
         .portfolio-item .description {
             margin: 10px 0;
             color: #fff;
         }
+
         .portfolio-item .hashtags {
             font-style: italic;
             color: #ddd;
             position: absolute;
             bottom: 10px;
-            left: 5px; /* 5px margin */
-            font-size: 0.6em; /* 30% smaller */
+            left: 5px;
+            font-size: 0.6em;
             text-align: left;
         }
+
         .portfolio-item .hashtags span {
             display: block;
-            margin-bottom: 5px; /* vertical stacking with 5px margin */
+            margin-bottom: 5px;
         }
+
         .portfolio-item:hover {
             transform: scale(1.1);
             z-index: 10;
         }
+
         .modal {
             display: none;
             position: fixed;
@@ -171,13 +199,14 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8); /* Default background color with 80% opacity */
+            background-color: rgba(0, 0, 0, 0.95);
             align-items: center;
             justify-content: center;
         }
+
         .modal-content {
-            padding: 0; /* Removed padding */
-            border: none; /* Removed border */
+            padding: 0;
+            border: none;
             width: 35%;
             height: 80%;
             display: flex;
@@ -185,12 +214,12 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             animation-name: animateModal;
             animation-duration: 0.4s;
-            border-radius: 15px; /* Rounded corners */
-            background: rgba(255, 255, 255, 0.7); /* 70% opacity */
+            border-radius: 15px;
             position: relative;
         }
+
         .modal-content-background {
-            border-radius: 15px; /* Rounded corners */
+            border-radius: 15px;
             background-size: cover;
             background-position: center;
             filter: blur(20px);
@@ -200,43 +229,52 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.7; /* 70% opacity */
+            opacity: 0.7;
         }
+
         @keyframes animateModal {
-            from {opacity: 0}
-            to {opacity: 1}
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
         }
+
         .modal-header {
             position: relative;
             width: 100%;
             text-align: center;
             color: white;
-            height: 20%; /* Set height of modal header to 20% */
+            height: 20%;
         }
+
         .modal-header img {
             width: 100%;
-            height: 100%; /* Set image height to fill the modal header */
-            object-fit: cover; /* Ensure the image covers the area without distortion */
-            margin: 0; /* Removed margin */
+            height: 100%;
+            object-fit: cover;
+            margin: 0;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
         }
+
         .modal-header h2 {
             position: absolute;
-            top: 50%; /* Adjusted to be in the middle of the image */
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             margin: 0;
             font-size: 1.5em;
             color: white;
         }
+
         .modal-close {
             position: absolute;
             top: 10px;
             right: 10px;
             width: 30px;
             height: 30px;
-            background-color: white;
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -244,66 +282,66 @@
             cursor: pointer;
             font-size: 20px;
         }
+
         .modal-body {
             flex-grow: 1;
             overflow-y: auto;
             margin: 20px;
-            background-color: transparent; /* Removed white background */
+            background-color: transparent;
             padding: 10px;
-            color: #333; /* Dark text color for better readability */
+            color: #333;
         }
+
         .modal-footer {
             text-align: center;
         }
+
         .modal-footer .hashtags {
             font-style: italic;
-            color: #333;
             font-size: 0.8em;
             text-align: center;
         }
+
         .modal-footer .hashtags span {
             display: inline-block;
             margin-right: 10px;
         }
+
         footer {
             text-align: center;
             padding: 20px 0;
             background: #222;
             color: #fff;
         }
-        .gallery-container {
+
+        .carousel-container {
             position: relative;
+            width: 90%;
+            margin: 0 auto;
             overflow: hidden;
-            display: flex;
-            align-items: center;
         }
-        .gallery-wrapper {
-            overflow: hidden;
-            width: calc(100% - 60px);
+
+        .carousel {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            transition: transform 0.5s ease-in-out;
         }
-        .gallery {
-            display: flex;
-            transition: transform 0.3s ease;
-            white-space: nowrap; /* Prevent line breaks */
-        }
-        .gallery-item {
-            display: inline-block; /* Display items inline */
-            width: 300px; /* Original size */
-            height: 200px; /* Original size */
-            position: relative;
+
+        .carousel-item {
+            min-width: 300px;
+            min-height: 200px;
             margin: 0 10px;
+            position: relative;
             cursor: pointer;
         }
-        .gallery-item img {
+
+        .carousel-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
         }
-        .gallery-item .overlay {
+
+        .carousel-item .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -319,25 +357,30 @@
             transition: opacity 0.3s ease;
             border-radius: 10px;
         }
-        .gallery-item:hover .overlay {
+
+        .carousel-item:hover .overlay {
             opacity: 1;
         }
+
         .arrow {
-            cursor: pointer;
-            font-size: 2em;
-            user-select: none;
             position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            padding: 0 10px;
-            z-index: 1; /* Ensure arrows are above the images */
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1;
         }
-        .arrow.left {
+
+        .arrow-left {
             left: 10px;
         }
-        .arrow.right {
+
+        .arrow-right {
             right: 10px;
         }
+
         .image-modal {
             display: none;
             position: fixed;
@@ -350,19 +393,22 @@
             align-items: center;
             justify-content: center;
         }
+
         .image-modal-content {
-            max-width: 90%;
-            max-height: 90%;
+            width: 70%;
+            height: 80%;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .image-modal img {
             max-width: 100%;
             max-height: 100%;
             height: auto;
             width: auto;
         }
+
         .image-modal-close {
             position: absolute;
             top: 20px;
@@ -371,17 +417,145 @@
             color: white;
             cursor: pointer;
         }
+
+        .blog-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px 0;
+        }
+
+        .blog-main {
+            display: flex;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-main img {
+            width: 50%;
+            object-fit: cover;
+        }
+
+        .blog-main .content {
+            padding: 20px;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .blog-main .content .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-main .content .info .hashtags {
+            font-style: italic;
+            color: gray;
+        }
+
+        .blog-main .content .info .date {
+            margin-top: 10px;
+        }
+
+        .blog-main .content .avatar {
+            align-self: flex-end;
+        }
+
+        .blog-main .content .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .blog-carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .blog-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .blog-carousel-item {
+            min-width: 300px;
+            min-height: 200px;
+            margin: 0 10px;
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-carousel-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .blog-carousel-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .blog-arrow-left,
+        .blog-arrow-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .blog-arrow-left {
+            left: 10px;
+        }
+
+        .blog-arrow-right {
+            right: 10px;
+        }
     </style>
     <!-- Include the showdown library -->
     <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <!-- Include the color-thief library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="profile-section">
             <div class="social-icons">
-                <a id="linkedin" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"></a>
-                <a id="instagram" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
-                <a id="twitter" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X"></a>
+                <a id="linkedin" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                        alt="LinkedIn"></a>
+                <a id="instagram" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                        alt="Instagram"></a>
+                <a id="twitter" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg"
+                        alt="X"></a>
             </div>
             <img id="profileImage" class="profile-image" src="" alt="Profile Image">
         </div>
@@ -391,6 +565,7 @@
         </header>
         <nav>
             <a href="#about">About Me</a>
+            <a href="#blog">Blog</a>
             <a href="#portfolio">Portfolio</a>
             <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
@@ -404,18 +579,27 @@
                 </div>
             </div>
         </section>
+        <section id="blog">
+            <h2>Blog</h2>
+            <div class="blog-container">
+                <div class="blog-main" id="mainBlog"></div>
+                <div class="blog-carousel-container">
+                    <button class="blog-arrow-left">&#10094;</button>
+                    <div class="blog-carousel" id="blogCarousel"></div>
+                    <button class="blog-arrow-right">&#10095;</button>
+                </div>
+            </div>
+        </section>
         <section id="portfolio">
             <h2>Portfolio</h2>
             <div id="projects" class="projects-grid"></div>
         </section>
         <section id="gallery">
             <h2>Gallery</h2>
-            <div class="gallery-container">
-                <div class="arrow left" id="leftArrow">&#9664;</div>
-                <div class="gallery-wrapper">
-                    <div class="gallery" id="gallery"></div>
-                </div>
-                <div class="arrow right" id="rightArrow">&#9654;</div>
+            <div class="carousel-container">
+                <button class="arrow arrow-left">&#10094;</button>
+                <div class="carousel" id="carousel"></div>
+                <button class="arrow arrow-right">&#10095;</button>
             </div>
         </section>
         <section id="contact">
@@ -427,29 +611,30 @@
         </footer>
     </div>
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-content-background" id="modalBackground"></div>
-            <div class="modal-header">
-                <img id="modalImage" src="" alt="Project Image">
-                <h2 id="modalTitle"></h2>
-                <div class="modal-close" id="modalClose">&times;</div>
-            </div>
-            <div class="modal-body">
-                <p id="modalDescription"></p>
-            </div>
-            <div class="modal-footer">
-                <p class="hashtags" id="modalHashtags"></p>
-            </div>
-        </div>
-    </div>
-
     <!-- Image Modal -->
     <div id="imageModal" class="image-modal">
         <span class="image-modal-close">&times;</span>
         <div class="image-modal-content">
             <img id="fullImage" src="" alt="Full Image">
+        </div>
+    </div>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-content-background"></div>
+            <div class="modal-header">
+                <img id="projectImage" src="" alt="Project Image">
+                <h2 id="projectName"></h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="projectDates"></p>
+                <div id="projectDescription"></div>
+            </div>
+            <div class="modal-footer">
+                <p class="hashtags" id="projectHashtags"></p>
+            </div>
         </div>
     </div>
 
@@ -487,6 +672,16 @@
             return data.records;
         }
 
+        async function fetchBlog() {
+            const response = await fetch(`https://api.airtable.com/v0/${baseId}/Blog`, {
+                headers: {
+                    Authorization: `Bearer ${apiKey}`
+                }
+            });
+            const data = await response.json();
+            return data.records;
+        }
+
         function displayProfile(profile) {
             document.getElementById('fullName').textContent = profile['Full Name'];
             document.getElementById('role').textContent = profile['Role / Position'];
@@ -505,7 +700,6 @@
             document.getElementById('email').href = `mailto:${profile['Email']}`;
             document.getElementById('footerName').textContent = profile['Full Name'];
 
-            // Set the image height to match the text height
             const aboutTextHeight = document.getElementById('aboutMe').offsetHeight;
             document.getElementById('aboutMeImage').style.height = `${aboutTextHeight}px`;
         }
@@ -527,17 +721,19 @@
                     </div>
                 `;
                 projectElement.addEventListener('click', () => {
-                    openModal(project);
+                    openProjectModal(project);
                 });
                 projectsContainer.appendChild(projectElement);
             });
         }
 
         function displayGallery(gallery) {
-            const galleryContainer = document.getElementById('gallery');
+            const carousel = document.getElementById('carousel');
+            let scrollPosition = 0;
+
             gallery.forEach(item => {
                 const galleryElement = document.createElement('div');
-                galleryElement.classList.add('gallery-item');
+                galleryElement.classList.add('carousel-item');
                 const date = new Date(item.fields['Date']).toLocaleDateString();
                 galleryElement.innerHTML = `
                     <img src="${item.fields['Photo'][0].url}" alt="Gallery Image">
@@ -549,37 +745,106 @@
                 galleryElement.addEventListener('click', () => {
                     openImageModal(item.fields['Photo'][0].url);
                 });
-                galleryContainer.appendChild(galleryElement);
+                carousel.appendChild(galleryElement);
             });
 
-            // Handle scrolling
-            const leftArrow = document.getElementById('leftArrow');
-            const rightArrow = document.getElementById('rightArrow');
-            const galleryWrapper = document.querySelector('.gallery-wrapper');
-            let scrollPosition = 0;
+            function scrollCarousel(direction) {
+                const itemWidth = document.querySelector('.carousel-item').offsetWidth;
+                const margin = parseInt(window.getComputedStyle(document.querySelector('.carousel-item')).marginRight);
+                const carouselWidth = document.querySelector('.carousel').scrollWidth;
+                const containerWidth = document.querySelector('.carousel-container').offsetWidth;
 
-            leftArrow.addEventListener('click', () => {
-                const maxScroll = galleryWrapper.scrollWidth - galleryWrapper.clientWidth;
-                if (scrollPosition > 0) {
-                    scrollPosition -= 320; // Scroll by 320px
+                if (direction === -1 && scrollPosition > 0) {
+                    scrollPosition -= (itemWidth + margin * 2);
                     if (scrollPosition < 0) scrollPosition = 0;
-                    galleryContainer.style.transform = `translateX(-${scrollPosition}px)`;
+                } else if (direction === 1 && scrollPosition < carouselWidth - containerWidth) {
+                    scrollPosition += (itemWidth + margin * 2);
+                    if (scrollPosition > carouselWidth - containerWidth) scrollPosition = carouselWidth - containerWidth;
                 }
-            });
+                carousel.style.transform = `translateX(-${scrollPosition}px)`;
+            }
 
-            rightArrow.addEventListener('click', () => {
-                const maxScroll = galleryWrapper.scrollWidth - galleryWrapper.clientWidth;
-                if (scrollPosition < maxScroll) {
-                    scrollPosition += 320; // Scroll by 320px
-                    if (scrollPosition > maxScroll) scrollPosition = maxScroll;
-                    galleryContainer.style.transform = `translateX(-${scrollPosition}px)`;
+            document.querySelector('.arrow-left').addEventListener('click', () => scrollCarousel(-1));
+            document.querySelector('.arrow-right').addEventListener('click', () => scrollCarousel(1));
+        }
+
+        function displayBlog(blog) {
+            const mainBlogContainer = document.getElementById('mainBlog');
+            const carouselContainer = document.getElementById('blogCarousel');
+
+            const firstPost = blog[0].fields;
+            const converter = new showdown.Converter();
+            const descriptionHTML = converter.makeHtml(firstPost['Description']);
+            const date = new Date(firstPost['Date']).toLocaleDateString();
+
+            mainBlogContainer.innerHTML = `
+                <img src="${firstPost['Banner'][0].url}" alt="Blog Banner">
+                <div class="content">
+                    <div class="info">
+                        <h3>${firstPost['Post Short Name']}</h3>
+                        <div class="description">${descriptionHTML}</div>
+                        <div class="date">${date}</div>
+                        <div class="hashtags">${firstPost['Hashtags'] ? firstPost['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : ''}</div>
+                    </div>
+                    <div class="avatar">
+                        <img src="${document.getElementById('profileImage').src}" alt="Avatar">
+                    </div>
+                </div>
+            `;
+
+            for (let i = 1; i < blog.length; i++) {
+                const post = blog[i].fields;
+                const postDate = new Date(post['Date']).toLocaleDateString();
+                const blogElement = document.createElement('div');
+                blogElement.classList.add('blog-carousel-item');
+                blogElement.innerHTML = `
+                    <img src="${post['Banner'][0].url}" alt="Blog Post">
+                    <div class="overlay">
+                        <h3>${post['Post Short Name']}</h3>
+                        <p>${postDate}</p>
+                        <p>${post['Hashtags'] ? post['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : ''}</p>
+                    </div>
+                `;
+                carouselContainer.appendChild(blogElement);
+            }
+
+            function scrollBlogCarousel(direction) {
+                const itemWidth = document.querySelector('.blog-carousel-item').offsetWidth;
+                const margin = parseInt(window.getComputedStyle(document.querySelector('.blog-carousel-item')).marginRight);
+                const carouselWidth = document.querySelector('.blog-carousel').scrollWidth;
+                const containerWidth = document.querySelector('.blog-carousel-container').offsetWidth;
+
+                let scrollPosition = carouselContainer.scrollLeft;
+                if (direction === -1 && scrollPosition > 0) {
+                    scrollPosition -= (itemWidth + margin * 2);
+                    if (scrollPosition < 0) scrollPosition = 0;
+                } else if (direction === 1 && scrollPosition < carouselWidth - containerWidth) {
+                    scrollPosition += (itemWidth + margin * 2);
+                    if (scrollPosition > carouselWidth - containerWidth) scrollPosition = carouselWidth - containerWidth;
                 }
-            });
+                carouselContainer.scrollLeft = scrollPosition;
+            }
+
+            document.querySelector('.blog-arrow-left').addEventListener('click', () => scrollBlogCarousel(-1));
+            document.querySelector('.blog-arrow-right').addEventListener('click', () => scrollBlogCarousel(1));
         }
 
         function openImageModal(url) {
             const imageModal = document.getElementById('imageModal');
-            document.getElementById('fullImage').src = url;
+            const fullImage = document.getElementById('fullImage');
+            fullImage.src = url;
+            fullImage.onload = function () {
+                const aspectRatio = fullImage.naturalWidth / fullImage.naturalHeight;
+                const screenAspectRatio = window.innerWidth / window.innerHeight;
+
+                if (aspectRatio > screenAspectRatio) {
+                    fullImage.style.width = '70%';
+                    fullImage.style.height = 'auto';
+                } else {
+                    fullImage.style.width = 'auto';
+                    fullImage.style.height = '80%';
+                }
+            };
             imageModal.style.display = 'flex';
         }
 
@@ -589,59 +854,58 @@
 
         document.querySelector('.image-modal-close').addEventListener('click', closeImageModal);
 
-        function getDominantColor(src, callback) {
-            const img = document.createElement('img');
-            img.src = src;
-            img.crossOrigin = "Anonymous";
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                context.drawImage(img, 0, 0);
-                const data = context.getImageData(0, 0, img.width, img.height).data;
-                let r = 0, g = 0, b = 0, count = 0;
+        function getLuminance(r, g, b) {
+            const a = [r, g, b].map(function (v) {
+                v /= 255;
+                return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+            });
+            return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+        }
 
-                for (let i = 0; i < data.length; i += 4) {
-                    r += data[i];
-                    g += data[i + 1];
-                    b += data[i + 2];
-                    count++;
-                }
+        function openProjectModal(project) {
+            const projectModal = document.getElementById('projectModal');
+            const projectImage = document.getElementById('projectImage');
+            projectImage.src = project.fields['Project Face Image'][0].url;
+            document.getElementById('projectName').textContent = project.fields['Project Name'];
+            document.getElementById('projectDates').textContent = `${new Date(project.fields['Project Start Date']).toLocaleDateString()} - ${new Date(project.fields['Project Completion Date']).toLocaleDateString()}`;
 
-                r = Math.floor(r / count);
-                g = Math.floor(g / count);
-                b = Math.floor(b / count);
+            const converter = new showdown.Converter();
+            const projectDescriptionHTML = converter.makeHtml(project.fields['Project Description']);
+            document.getElementById('projectDescription').innerHTML = projectDescriptionHTML;
 
-                callback(`rgba(${r},${g},${b},0.8)`); // Ensure the callback sets opacity to 80%
+            document.getElementById('projectHashtags').innerHTML = project.fields['Hashtags'] ? project.fields['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : '';
+
+            const colorThief = new ColorThief();
+            const img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.src = project.fields['Project Face Image'][0].url;
+            img.onload = () => {
+                const dominantColor = colorThief.getColor(img);
+                document.querySelector('.modal-content').style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 0.95)`;
+
+                const luminance = getLuminance(dominantColor[0], dominantColor[1], dominantColor[2]);
+                const textColor = luminance > 0.5 ? '#000' : '#fff';
+
+                document.getElementById('projectName').style.color = textColor;
+                document.getElementById('projectDates').style.color = textColor;
+                document.getElementById('projectDescription').style.color = textColor;
+                document.getElementById('projectHashtags').style.color = textColor;
+
+                const closeIcon = document.querySelector('.modal-close');
+                closeIcon.style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 1)`;
+                closeIcon.style.color = textColor;
+
+                projectModal.style.display = 'flex';
             };
         }
 
-        function openModal(project) {
-            const modalBackground = document.getElementById('modalBackground');
-            getDominantColor(project.fields['Project Face Image'][0].url, color => {
-                modalBackground.style.background = color;
-                document.getElementById('modalClose').style.color = color;
-            });
-
-            document.getElementById('modalImage').src = project.fields['Project Face Image'][0].url;
-            document.getElementById('modalTitle').textContent = project.fields['Project Name'];
-            document.getElementById('modalDescription').textContent = project.fields['Project Description']; // Updated to Project Description
-            document.getElementById('modalHashtags').innerHTML = project.fields['Hashtags'] ? project.fields['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : '';
-            document.getElementById('myModal').style.display = "flex";
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
         }
 
-        function closeModal() {
-            document.getElementById('myModal').style.display = "none";
-        }
-
-        document.getElementById('modalClose').addEventListener('click', closeModal);
-
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('myModal')) {
-                closeModal();
-            }
-        }
+        document.querySelector('.modal-close').addEventListener('click', closeProjectModal);
+        document.getElementById('projectModal').addEventListener('click', closeProjectModal);
+        document.querySelector('.modal-content').addEventListener('click', (e) => e.stopPropagation());
 
         fetchProfile().then(displayProfile).catch(error => {
             console.error('Error fetching profile:', error);
@@ -654,6 +918,11 @@
         fetchGallery().then(displayGallery).catch(error => {
             console.error('Error fetching gallery:', error);
         });
+
+        fetchBlog().then(displayBlog).catch(error => {
+            console.error('Error fetching blog:', error);
+        });
     </script>
 </body>
+
 </html>
