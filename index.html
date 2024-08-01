@@ -13,17 +13,38 @@
             color: #333;
             transition: background-color 0.3s;
         }
-        body.dimmed {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
         .container {
             width: 80%;
             margin: 0 auto;
             padding: 20px;
             transition: filter 0.3s;
+            position: relative;
         }
-        body.dimmed .container {
-            filter: brightness(0.5);
+        .profile-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .profile-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 10px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
         }
         header {
             text-align: center;
@@ -68,8 +89,9 @@
         }
         .about-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: 10px;
+            object-fit: cover;
         }
         .projects-grid {
             display: flex;
@@ -249,12 +271,120 @@
             background: #222;
             color: #fff;
         }
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .gallery-wrapper {
+            overflow: hidden;
+            width: calc(100% - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .gallery {
+            display: flex;
+            transition: transform 0.3s ease;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        .gallery-item {
+            display: inline-block; /* Display items inline */
+            width: 300px; /* Original size */
+            height: 200px; /* Original size */
+            position: relative;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        .arrow {
+            cursor: pointer;
+            font-size: 2em;
+            user-select: none;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            padding: 0 10px;
+            z-index: 1; /* Ensure arrows are above the images */
+        }
+        .arrow.left {
+            left: 10px;
+        }
+        .arrow.right {
+            right: 10px;
+        }
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 25;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image-modal img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+            width: auto;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+        }
     </style>
-    <!-- Include the marked library -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Include the showdown library -->
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 </head>
 <body>
     <div class="container">
+        <div class="profile-section">
+            <div class="social-icons">
+                <a id="linkedin" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                <a id="instagram" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+                <a id="twitter" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X"></a>
+            </div>
+            <img id="profileImage" class="profile-image" src="" alt="Profile Image">
+        </div>
         <header>
             <h1 id="fullName">Mikhail Nikotin</h1>
             <p id="role">IT Architect</p>
@@ -262,6 +392,7 @@
         <nav>
             <a href="#about">About Me</a>
             <a href="#portfolio">Portfolio</a>
+            <a href="#gallery">Gallery</a>
             <a href="#contact">Contact</a>
         </nav>
         <section id="about">
@@ -276,6 +407,16 @@
         <section id="portfolio">
             <h2>Portfolio</h2>
             <div id="projects" class="projects-grid"></div>
+        </section>
+        <section id="gallery">
+            <h2>Gallery</h2>
+            <div class="gallery-container">
+                <div class="arrow left" id="leftArrow">&#9664;</div>
+                <div class="gallery-wrapper">
+                    <div class="gallery" id="gallery"></div>
+                </div>
+                <div class="arrow right" id="rightArrow">&#9654;</div>
+            </div>
         </section>
         <section id="contact">
             <h2>Contact</h2>
@@ -304,6 +445,14 @@
         </div>
     </div>
 
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="image-modal-close">&times;</span>
+        <div class="image-modal-content">
+            <img id="fullImage" src="" alt="Full Image">
+        </div>
+    </div>
+
     <script>
         const apiKey = 'patxIIVF2bVpYJnRx.9c673f938bc2ba4e4a0a93f573807595f5083553b340ff884c967db403686333';
         const baseId = 'appYksrdtmIcgngbp';
@@ -328,11 +477,30 @@
             return data.records;
         }
 
+        async function fetchGallery() {
+            const response = await fetch(`https://api.airtable.com/v0/${baseId}/Gallery`, {
+                headers: {
+                    Authorization: `Bearer ${apiKey}`
+                }
+            });
+            const data = await response.json();
+            return data.records;
+        }
+
         function displayProfile(profile) {
             document.getElementById('fullName').textContent = profile['Full Name'];
             document.getElementById('role').textContent = profile['Role / Position'];
-            document.getElementById('aboutMe').innerHTML = marked(profile['About Me Section']); // Use marked to convert Markdown to HTML
+
+            const converter = new showdown.Converter();
+            const aboutMeHTML = converter.makeHtml(profile['About Me Section']);
+            document.getElementById('aboutMe').innerHTML = aboutMeHTML;
+
             document.getElementById('aboutMeImage').src = profile['600x600 About Me Image'][0].url;
+            document.getElementById('profileImage').src = profile['Avatar'][0].url;
+            document.getElementById('linkedin').href = profile['LinkedIn'];
+            document.getElementById('instagram').href = profile['Instagram'];
+            document.getElementById('twitter').href = profile['X'];
+
             document.getElementById('email').textContent = profile['Email'];
             document.getElementById('email').href = `mailto:${profile['Email']}`;
             document.getElementById('footerName').textContent = profile['Full Name'];
@@ -364,6 +532,62 @@
                 projectsContainer.appendChild(projectElement);
             });
         }
+
+        function displayGallery(gallery) {
+            const galleryContainer = document.getElementById('gallery');
+            gallery.forEach(item => {
+                const galleryElement = document.createElement('div');
+                galleryElement.classList.add('gallery-item');
+                const date = new Date(item.fields['Date']).toLocaleDateString();
+                galleryElement.innerHTML = `
+                    <img src="${item.fields['Photo'][0].url}" alt="Gallery Image">
+                    <div class="overlay">
+                        <p>${item.fields['Short Description']}</p>
+                        <p>${date}</p>
+                    </div>
+                `;
+                galleryElement.addEventListener('click', () => {
+                    openImageModal(item.fields['Photo'][0].url);
+                });
+                galleryContainer.appendChild(galleryElement);
+            });
+
+            // Handle scrolling
+            const leftArrow = document.getElementById('leftArrow');
+            const rightArrow = document.getElementById('rightArrow');
+            const galleryWrapper = document.querySelector('.gallery-wrapper');
+            let scrollPosition = 0;
+
+            leftArrow.addEventListener('click', () => {
+                const maxScroll = galleryWrapper.scrollWidth - galleryWrapper.clientWidth;
+                if (scrollPosition > 0) {
+                    scrollPosition -= 320; // Scroll by 320px
+                    if (scrollPosition < 0) scrollPosition = 0;
+                    galleryContainer.style.transform = `translateX(-${scrollPosition}px)`;
+                }
+            });
+
+            rightArrow.addEventListener('click', () => {
+                const maxScroll = galleryWrapper.scrollWidth - galleryWrapper.clientWidth;
+                if (scrollPosition < maxScroll) {
+                    scrollPosition += 320; // Scroll by 320px
+                    if (scrollPosition > maxScroll) scrollPosition = maxScroll;
+                    galleryContainer.style.transform = `translateX(-${scrollPosition}px)`;
+                }
+            });
+        }
+
+        function openImageModal(url) {
+            const imageModal = document.getElementById('imageModal');
+            document.getElementById('fullImage').src = url;
+            imageModal.style.display = 'flex';
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        document.querySelector('.image-modal-close').addEventListener('click', closeImageModal);
 
         function getDominantColor(src, callback) {
             const img = document.createElement('img');
@@ -425,6 +649,10 @@
 
         fetchProjects().then(displayProjects).catch(error => {
             console.error('Error fetching projects:', error);
+        });
+
+        fetchGallery().then(displayGallery).catch(error => {
+            console.error('Error fetching gallery:', error);
         });
     </script>
 </body>
