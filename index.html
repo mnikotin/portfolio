@@ -75,6 +75,7 @@
             margin: 0 15px;
             text-decoration: none;
             color: #555;
+            cursor: pointer;
         }
 
         nav a:hover {
@@ -130,6 +131,7 @@
             background-size: cover;
             background-position: center;
             width: calc(48% - 20px);
+            height: 190px;
             transition: transform 0.3s, z-index 0.3s;
             z-index: 0;
             cursor: pointer;
@@ -142,7 +144,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             filter: blur(11px);
             z-index: 0;
         }
@@ -199,7 +201,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.75);
             align-items: center;
             justify-content: center;
         }
@@ -314,55 +316,7 @@
             color: #fff;
         }
 
-        .carousel-container {
-            position: relative;
-            width: 90%;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-item {
-            min-width: 300px;
-            min-height: 200px;
-            margin: 0 10px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .carousel-item .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 10px;
-        }
-
-        .carousel-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .arrow {
+        .arrow-blog {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -373,11 +327,30 @@
             z-index: 1;
         }
 
-        .arrow-left {
+        .arrow-left-blog {
             left: 10px;
         }
 
-        .arrow-right {
+        .arrow-right-blog {
+            right: 10px;
+        }
+
+        .arrow-gallery {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .arrow-left-gallery {
+            left: 10px;
+        }
+
+        .arrow-right-gallery {
             right: 10px;
         }
 
@@ -400,6 +373,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            position: relative;
         }
 
         .image-modal img {
@@ -407,6 +382,23 @@
             max-height: 100%;
             height: auto;
             width: auto;
+        }
+
+        .image-modal-header {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .image-modal-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
         }
 
         .image-modal-close {
@@ -423,6 +415,7 @@
             flex-direction: column;
             align-items: center;
             margin: 50px 0;
+            position: relative;
         }
 
         .blog-main {
@@ -431,6 +424,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .blog-main img {
@@ -462,6 +456,9 @@
 
         .blog-main .content .avatar {
             align-self: flex-end;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .blog-main .content .avatar img {
@@ -471,36 +468,114 @@
             object-fit: cover;
         }
 
-        .blog-carousel-container {
+        .blog-main .content .avatar button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 150%;
+        }
+
+        .blog-main .content .avatar button:hover {
+            background-color: #555;
+        }
+
+        .blog-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .blog-dots .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .blog-dots .dot.active {
+            background-color: #717171;
+        }
+
+        .carousel-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            margin-top: 20px;
+            margin: 0 auto;
         }
 
-        .blog-carousel {
+        .carousel {
             display: flex;
+            justify-content: center;
+            align-items: center;
             transition: transform 0.5s ease-in-out;
         }
 
-        .blog-carousel-item {
-            min-width: 300px;
-            min-height: 200px;
-            margin: 0 10px;
+        .carousel-item {
             position: relative;
+            margin: 0 15px;
             cursor: pointer;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, top 0.3s;
         }
 
-        .blog-carousel-item img {
+        .carousel-item img {
+            border-radius: 10px;
+            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .carousel-item.large img {
+            width: 150%;
+            height: 150%;
+        }
+
+        .carousel-item.small img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
 
-        .blog-carousel-item .overlay {
+        .carousel-item:hover {
+            top: -20px;
+        }
+
+        .cv-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .cv-button:hover {
+            background-color: #555;
+        }
+
+        .read-full-text {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .read-full-text:hover {
+            background-color: #555;
+        }
+
+        .overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -515,30 +590,6 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
-        .blog-carousel-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .blog-arrow-left,
-        .blog-arrow-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.7);
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1;
-        }
-
-        .blog-arrow-left {
-            left: 10px;
-        }
-
-        .blog-arrow-right {
-            right: 10px;
-        }
     </style>
     <!-- Include the showdown library -->
     <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
@@ -550,12 +601,9 @@
     <div class="container">
         <div class="profile-section">
             <div class="social-icons">
-                <a id="linkedin" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-                        alt="LinkedIn"></a>
-                <a id="instagram" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-                        alt="Instagram"></a>
-                <a id="twitter" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg"
-                        alt="X"></a>
+                <a id="linkedin" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"></a>
+                <a id="instagram" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+                <a id="twitter" href="#" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X"></a>
             </div>
             <img id="profileImage" class="profile-image" src="" alt="Profile Image">
         </div>
@@ -578,16 +626,15 @@
                     <img id="aboutMeImage" src="" alt="About Me Image">
                 </div>
             </div>
+            <a id="cvLink" class="cv-button" href="#" target="_blank">View my CV</a>
         </section>
         <section id="blog">
             <h2>Blog</h2>
             <div class="blog-container">
+                <button class="arrow-blog arrow-left-blog">&#10094;</button>
                 <div class="blog-main" id="mainBlog"></div>
-                <div class="blog-carousel-container">
-                    <button class="blog-arrow-left">&#10094;</button>
-                    <div class="blog-carousel" id="blogCarousel"></div>
-                    <button class="blog-arrow-right">&#10095;</button>
-                </div>
+                <button class="arrow-blog arrow-right-blog">&#10095;</button>
+                <div class="blog-dots" id="blogDots"></div>
             </div>
         </section>
         <section id="portfolio">
@@ -597,9 +644,9 @@
         <section id="gallery">
             <h2>Gallery</h2>
             <div class="carousel-container">
-                <button class="arrow arrow-left">&#10094;</button>
+                <button class="arrow-gallery arrow-left-gallery">&#10094;</button>
                 <div class="carousel" id="carousel"></div>
-                <button class="arrow arrow-right">&#10095;</button>
+                <button class="arrow-gallery arrow-right-gallery">&#10095;</button>
             </div>
         </section>
         <section id="contact">
@@ -613,9 +660,14 @@
 
     <!-- Image Modal -->
     <div id="imageModal" class="image-modal">
-        <span class="image-modal-close">&times;</span>
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
         <div class="image-modal-content">
             <img id="fullImage" src="" alt="Full Image">
+            <div class="image-modal-header">
+                <img id="modalAvatar" src="" alt="Avatar" class="profile-image">
+                <p id="modalDate"></p>
+                <p id="modalShortDescription"></p>
+            </div>
         </div>
     </div>
 
@@ -638,9 +690,28 @@
         </div>
     </div>
 
+    <!-- Blog Full Text Modal -->
+    <div id="blogFullTextModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img id="blogFullImage" src="" alt="Blog Full Image">
+                <h2 id="blogFullTitle"></h2>
+                <span class="modal-close" onclick="closeBlogFullTextModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="blogFullText"></div>
+            <div class="modal-footer">
+                <p class="hashtags" id="blogFullHashtags"></p>
+            </div>
+        </div>
+    </div>
+
     <script>
         const apiKey = 'patxIIVF2bVpYJnRx.9c673f938bc2ba4e4a0a93f573807595f5083553b340ff884c967db403686333';
         const baseId = 'appYksrdtmIcgngbp';
+
+        let currentBlogIndex = 0;
+        let blogData = [];
+        let galleryData = [];
 
         async function fetchProfile() {
             const response = await fetch(`https://api.airtable.com/v0/${baseId}/Profile`, {
@@ -699,9 +770,11 @@
             document.getElementById('email').textContent = profile['Email'];
             document.getElementById('email').href = `mailto:${profile['Email']}`;
             document.getElementById('footerName').textContent = profile['Full Name'];
+            document.getElementById('cvLink').href = profile['CV'][0].url;
 
             const aboutTextHeight = document.getElementById('aboutMe').offsetHeight;
-            document.getElementById('aboutMeImage').style.height = `${aboutTextHeight}px`;
+            const buttonHeight = document.querySelector('.cv-button').offsetHeight;
+            document.getElementById('aboutMeImage').style.height = `${aboutTextHeight + buttonHeight}px`;
         }
 
         function displayProjects(projects) {
@@ -729,110 +802,98 @@
 
         function displayGallery(gallery) {
             const carousel = document.getElementById('carousel');
-            let scrollPosition = 0;
+            galleryData = gallery;
 
-            gallery.forEach(item => {
-                const galleryElement = document.createElement('div');
-                galleryElement.classList.add('carousel-item');
-                const date = new Date(item.fields['Date']).toLocaleDateString();
-                galleryElement.innerHTML = `
-                    <img src="${item.fields['Photo'][0].url}" alt="Gallery Image">
-                    <div class="overlay">
-                        <p>${item.fields['Short Description']}</p>
-                        <p>${date}</p>
-                    </div>
-                `;
-                galleryElement.addEventListener('click', () => {
-                    openImageModal(item.fields['Photo'][0].url);
+            function updateCarousel() {
+                carousel.innerHTML = '';
+                const middleIndex = Math.ceil(galleryData.length / 2) - 1;
+
+                galleryData.forEach((item, index) => {
+                    const galleryElement = document.createElement('div');
+                    galleryElement.classList.add('carousel-item', index === middleIndex ? 'large' : 'small');
+                    galleryElement.innerHTML = `
+                        <img src="${item.fields['Photo'][0].url}" alt="Gallery Image">
+                        <div class="overlay">
+                            <p>${item.fields['Short Description']}</p>
+                            <p>${new Date(item.fields['Date']).toLocaleDateString()}</p>
+                        </div>
+                    `;
+                    galleryElement.addEventListener('click', () => {
+                        openImageModal(item);
+                    });
+                    carousel.appendChild(galleryElement);
                 });
-                carousel.appendChild(galleryElement);
-            });
-
-            function scrollCarousel(direction) {
-                const itemWidth = document.querySelector('.carousel-item').offsetWidth;
-                const margin = parseInt(window.getComputedStyle(document.querySelector('.carousel-item')).marginRight);
-                const carouselWidth = document.querySelector('.carousel').scrollWidth;
-                const containerWidth = document.querySelector('.carousel-container').offsetWidth;
-
-                if (direction === -1 && scrollPosition > 0) {
-                    scrollPosition -= (itemWidth + margin * 2);
-                    if (scrollPosition < 0) scrollPosition = 0;
-                } else if (direction === 1 && scrollPosition < carouselWidth - containerWidth) {
-                    scrollPosition += (itemWidth + margin * 2);
-                    if (scrollPosition > carouselWidth - containerWidth) scrollPosition = carouselWidth - containerWidth;
-                }
-                carousel.style.transform = `translateX(-${scrollPosition}px)`;
             }
 
-            document.querySelector('.arrow-left').addEventListener('click', () => scrollCarousel(-1));
-            document.querySelector('.arrow-right').addEventListener('click', () => scrollCarousel(1));
+            function scrollCarousel(direction) {
+                if (direction === 1) {
+                    galleryData.push(galleryData.shift());
+                } else {
+                    galleryData.unshift(galleryData.pop());
+                }
+                updateCarousel();
+            }
+
+            updateCarousel();
+
+            document.querySelector('.arrow-left-gallery').addEventListener('click', () => scrollCarousel(-1));
+            document.querySelector('.arrow-right-gallery').addEventListener('click', () => scrollCarousel(1));
         }
 
-        function displayBlog(blog) {
-            const mainBlogContainer = document.getElementById('mainBlog');
-            const carouselContainer = document.getElementById('blogCarousel');
+        function displayBlog(index) {
+            if (index < 0 || index >= blogData.length) return;
 
-            const firstPost = blog[0].fields;
+            const blogPost = blogData[index].fields;
+            const mainBlogContainer = document.getElementById('mainBlog');
             const converter = new showdown.Converter();
-            const descriptionHTML = converter.makeHtml(firstPost['Description']);
-            const date = new Date(firstPost['Date']).toLocaleDateString();
+            const descriptionHTML = converter.makeHtml(blogPost['Description']);
+            const date = new Date(blogPost['Date']).toLocaleDateString();
 
             mainBlogContainer.innerHTML = `
-                <img src="${firstPost['Banner'][0].url}" alt="Blog Banner">
+                <img src="${blogPost['Banner'][0].url}" alt="Blog Banner">
                 <div class="content">
                     <div class="info">
-                        <h3>${firstPost['Post Short Name']}</h3>
+                        <h3>${blogPost['Post Short Name']}</h3>
                         <div class="description">${descriptionHTML}</div>
                         <div class="date">${date}</div>
-                        <div class="hashtags">${firstPost['Hashtags'] ? firstPost['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : ''}</div>
+                        <div class="hashtags">${blogPost['Hashtags'] ? blogPost['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : ''}</div>
                     </div>
                     <div class="avatar">
                         <img src="${document.getElementById('profileImage').src}" alt="Avatar">
+                        <button class="read-full-text" onclick="openBlogFullTextModal(${index})">Read Full Text</button>
                     </div>
                 </div>
             `;
 
-            for (let i = 1; i < blog.length; i++) {
-                const post = blog[i].fields;
-                const postDate = new Date(post['Date']).toLocaleDateString();
-                const blogElement = document.createElement('div');
-                blogElement.classList.add('blog-carousel-item');
-                blogElement.innerHTML = `
-                    <img src="${post['Banner'][0].url}" alt="Blog Post">
-                    <div class="overlay">
-                        <h3>${post['Post Short Name']}</h3>
-                        <p>${postDate}</p>
-                        <p>${post['Hashtags'] ? post['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : ''}</p>
-                    </div>
-                `;
-                carouselContainer.appendChild(blogElement);
-            }
-
-            function scrollBlogCarousel(direction) {
-                const itemWidth = document.querySelector('.blog-carousel-item').offsetWidth;
-                const margin = parseInt(window.getComputedStyle(document.querySelector('.blog-carousel-item')).marginRight);
-                const carouselWidth = document.querySelector('.blog-carousel').scrollWidth;
-                const containerWidth = document.querySelector('.blog-carousel-container').offsetWidth;
-
-                let scrollPosition = carouselContainer.scrollLeft;
-                if (direction === -1 && scrollPosition > 0) {
-                    scrollPosition -= (itemWidth + margin * 2);
-                    if (scrollPosition < 0) scrollPosition = 0;
-                } else if (direction === 1 && scrollPosition < carouselWidth - containerWidth) {
-                    scrollPosition += (itemWidth + margin * 2);
-                    if (scrollPosition > carouselWidth - containerWidth) scrollPosition = carouselWidth - containerWidth;
-                }
-                carouselContainer.scrollLeft = scrollPosition;
-            }
-
-            document.querySelector('.blog-arrow-left').addEventListener('click', () => scrollBlogCarousel(-1));
-            document.querySelector('.blog-arrow-right').addEventListener('click', () => scrollBlogCarousel(1));
+            updateBlogDots();
         }
 
-        function openImageModal(url) {
+        function updateBlogDots() {
+            const dotsContainer = document.getElementById('blogDots');
+            dotsContainer.innerHTML = '';
+
+            for (let i = 0; i < blogData.length; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === currentBlogIndex) {
+                    dot.classList.add('active');
+                }
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function openImageModal(item) {
             const imageModal = document.getElementById('imageModal');
             const fullImage = document.getElementById('fullImage');
-            fullImage.src = url;
+            const modalShortDescription = document.getElementById('modalShortDescription');
+            const modalDate = document.getElementById('modalDate');
+            const modalAvatar = document.getElementById('modalAvatar');
+
+            fullImage.src = item.fields['Photo'][0].url;
+            modalShortDescription.textContent = item.fields['Short Description'];
+            modalDate.textContent = new Date(item.fields['Date']).toLocaleDateString();
+            modalAvatar.src = document.getElementById('profileImage').src;
+
             fullImage.onload = function () {
                 const aspectRatio = fullImage.naturalWidth / fullImage.naturalHeight;
                 const screenAspectRatio = window.innerWidth / window.innerHeight;
@@ -907,6 +968,68 @@
         document.getElementById('projectModal').addEventListener('click', closeProjectModal);
         document.querySelector('.modal-content').addEventListener('click', (e) => e.stopPropagation());
 
+        function openBlogFullTextModal(index) {
+            const blogPost = blogData[index].fields;
+            const blogFullTextModal = document.getElementById('blogFullTextModal');
+            const blogFullImage = document.getElementById('blogFullImage');
+            const blogFullTitle = document.getElementById('blogFullTitle');
+            const blogFullText = document.getElementById('blogFullText');
+            const blogFullHashtags = document.getElementById('blogFullHashtags');
+
+            blogFullImage.src = blogPost['Banner'][0].url;
+            blogFullTitle.textContent = blogPost['Post Short Name'];
+
+            const converter = new showdown.Converter();
+            blogFullText.innerHTML = converter.makeHtml(blogPost['Description']);
+
+            blogFullHashtags.innerHTML = blogPost['Hashtags'] ? blogPost['Hashtags'].map(tag => `<span>${tag}</span>`).join('') : '';
+
+            const colorThief = new ColorThief();
+            const img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.src = blogPost['Banner'][0].url;
+            img.onload = () => {
+                const dominantColor = colorThief.getColor(img);
+                document.querySelector('#blogFullTextModal .modal-content').style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 0.95)`;
+
+                const luminance = getLuminance(dominantColor[0], dominantColor[1], dominantColor[2]);
+                const textColor = luminance > 0.5 ? '#000' : '#fff';
+
+                blogFullTitle.style.color = textColor;
+                blogFullText.style.color = textColor;
+                blogFullHashtags.style.color = textColor;
+
+                const closeIcon = document.querySelector('#blogFullTextModal .modal-close');
+                closeIcon.style.backgroundColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]}, 1)`;
+                closeIcon.style.color = textColor;
+
+                blogFullTextModal.style.display = 'flex';
+            };
+        }
+
+        function closeBlogFullTextModal() {
+            document.getElementById('blogFullTextModal').style.display = 'none';
+        }
+
+        document.querySelector('.arrow-left-blog').addEventListener('click', () => {
+            currentBlogIndex = (currentBlogIndex - 1 + blogData.length) % blogData.length;
+            displayBlog(currentBlogIndex);
+        });
+
+        document.querySelector('.arrow-right-blog').addEventListener('click', () => {
+            currentBlogIndex = (currentBlogIndex + 1) % blogData.length;
+            displayBlog(currentBlogIndex);
+        });
+
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
         fetchProfile().then(displayProfile).catch(error => {
             console.error('Error fetching profile:', error);
         });
@@ -919,7 +1042,10 @@
             console.error('Error fetching gallery:', error);
         });
 
-        fetchBlog().then(displayBlog).catch(error => {
+        fetchBlog().then(data => {
+            blogData = data;
+            displayBlog(currentBlogIndex);
+        }).catch(error => {
             console.error('Error fetching blog:', error);
         });
     </script>
